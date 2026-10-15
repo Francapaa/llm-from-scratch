@@ -1,5 +1,6 @@
 import urllib.request
 import re
+from tokenizer import SimpleTokenizerV2
 
 url = ("https://raw.githubusercontent.com/rasbt/"
        "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
@@ -21,6 +22,7 @@ print(len(preprocessed))
 print(preprocessed[:30])
 
 
+
 all_words = sorted(set(preprocessed))
 vocab_size = len(all_words)
 print(vocab_size)
@@ -30,3 +32,8 @@ print(vocab_size)
 vocab = {token: integer for integer, token in enumerate(all_words)}
 for i, item in enumerate(vocab.items()):
     print(item)
+vocab["<|unk|>"] = len(vocab)
+
+
+tokenizer = SimpleTokenizerV2(vocab)
+print(tokenizer.encode(text))
